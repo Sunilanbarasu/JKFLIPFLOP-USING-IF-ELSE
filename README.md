@@ -34,15 +34,67 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
+Start with current state Q, and inputs J and K.
+
+Apply a clock pulse to trigger the flip-flop.
+
+If J = 0 and K = 0, output Q remains unchanged.
+
+If J = 0 and K = 1, output Q is reset to 0.
+
+If J = 1 and K = 0, output Q is set to 1.
+
+If J = 1 and K = 1, output Q toggles (i.e., Q = NOT Q).
+
+The output is updated on the clock edge.
+
+Repeat the process for each clock cycle.
+
+Do you need this represented in a table or logi
 
 **PROGRAM**
+```
+module jkflipflop(q, qb,j,k,clock,reset);
+    input j,k,clock,reset;
+    output reg q, qb;
+	 
+always @ (posedge (clock))
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+    begin 
+        if (!reset)
+            begin
+               q <= q;
+               qb <=qb;
+            end   
+        
+else
+   begin
+	   if(j==0 && k==0)
+		   begin
+			q<=q;
+			qb<=qb;
+			end
+		else if(j!=k)
+		   begin
+			q<=j;
+			qb<=k;
+			end
+		else if(j==1 && k==1)
+		    begin
+			 q<=~q;
+			 qb<=~qb;
+			 end
+	end
+end	
+endmodule
+```
 
 **RTL LOGIC FOR FLIPFLOPS**
+![de jk](https://github.com/user-attachments/assets/b241427f-8420-4d0f-8fa0-2bcc2960f270)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![de j k](https://github.com/user-attachments/assets/0cfe08da-1a5a-471f-8ac7-6ff23fca35b4)
 
 **RESULTS**
+
+Implementation of JK flipflop using verilog and validating their functionality using their functional tables is executed and the output is verified successfully.
